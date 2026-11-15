@@ -1,0 +1,99 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model School {
+  id          String   @id @default(cuid())
+  name        String
+  brandColor  String   @default("#005a36")
+  logoUrl     String?
+  teachers    Teacher[]
+}
+
+model Teacher {
+  id          String   @id @default(cuid())
+  schoolId    String
+  school      School   @relation(fields: [schoolId], references: [id])
+  name        String
+  email       String   @unique
+  classGrade  String   // e.g. "11-A"
+  gmailToken  String?  // SQLite stringified JSON or token string
+  students    Student[]
+  campaigns   DispatchCampaign[]
+}
+
+model Student {
+  id               String   @id @default(cuid())
+  teacherId        String
+  teacher          Teacher  @relation(fields: [teacherId], references: [id])
+  name             String
+  gender           String
+  transport        String
+  busRoute         String?
+  busStop          String?
+  busSeat          String?
+  stayBack         Boolean  @default(false)
+  remedial         Boolean  @default(false)
+  lastScore        Float?
+  consentStatus    String   @default("PENDING") // PENDING | SUBMITTED | WAIVED
+  medicalAlert     String?
+  guardians        Guardian[]
+  assessments      AssessmentScore[]
+}
+
+model Guardian {
+  id              String   @id @default(cuid())
+  studentId       String
+  student         Student  @relation(fields: [studentId], references: [id])
+  name            String
+  salutation      String
+  email           String
+  whatsappNumber  String
+  relationship    String   @default("Parent")
+  preferredChannel String  @default("BOTH") // EMAIL | WHATSAPP | BOTH
+  messagesSent    MessageRecipient[]
+}
+
+model DispatchCampaign {
+  id           String   @id @default(cuid())
+  teacherId    String
+  teacher      Teacher  @relation(fields: [teacherId], references: [id])
+  prompt       String
+  scenario     String?
+  tone         String   @default("Warm")
+  status       String   @default("DRAFT") // DRAFT | WAITING_UNDO | DISPATCHING | COMPLETED | CANCELLED
+  createdAt    DateTime @default(now())
+  dispatchedAt DateTime?
+  recipients   MessageRecipient[]
+}
+
+model MessageRecipient {
+  id            String   @id @default(cuid())
+  campaignId    String
+  campaign      DispatchCampaign @relation(fields: [campaignId], references: [id])
+  guardianId    String
+  guardian      Guardian @relation(fields: [guardianId], references: [id])
+  emailSubject  String
+  emailBodyHtml String
+  whatsappText  String
+  emailStatus   String   @default("PENDING") // PENDING | SENT | FAILED
+  whatsappStatus String  @default("PENDING")
+  emailSentAt   DateTime?
+  whatsappSentAt DateTime?
+  createdAt     DateTime @default(now())
+}
+
+model AssessmentScore {
+  id        String   @id @default(cuid())
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id])
+  subject   String
+  score     Float
+  maxScore  Float
+  date      DateTime @default(now())
+}

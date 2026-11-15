@@ -1,0 +1,18 @@
+{
+  "name": "GEMS TeacherPilot — Multichannel Communication Portal",
+  "short_name": "TeacherPilot",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#005a36",
+  "theme_color": "#005a36",
+  "orientation": "portrait-primary",
+  "description": "GEMS Education AI-powered Multichannel Parent Communication Co-Pilot",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

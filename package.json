@@ -1,0 +1,18 @@
+{
+  "name": "teacherpilot-prod",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm --prefix apps/web run dev",
+    "build": "npm --prefix apps/web run build",
+    "start": "npm --prefix apps/web run start",
+    "test": "npm --prefix apps/web run test",
+    "db:generate": "npm --prefix packages/db run generate",
+    "db:push": "npm --prefix packages/db run db:push",
+    "db:seed": "npm --prefix packages/db run seed"
+  }
+}

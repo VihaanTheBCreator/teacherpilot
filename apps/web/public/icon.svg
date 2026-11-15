@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="gemsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#005a36"/>
+      <stop offset="100%" stop-color="#003520"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd56b"/>
+      <stop offset="50%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#d48810"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Rounded Rect -->
+  <rect width="512" height="512" rx="128" fill="url(#gemsGrad)"/>
+  
+  <!-- Outer Gold Border Shield -->
+  <path d="M 256 64 C 340 64, 400 110, 400 210 C 400 320, 290 400, 256 432 C 222 400, 112 320, 112 210 C 112 110, 172 64, 256 64 Z" 
+        fill="none" stroke="url(#goldGrad)" stroke-width="12" stroke-linejoin="round"/>
+        
+  <!-- Inner Shield Fill -->
+  <path d="M 256 84 C 324 84, 380 124, 380 210 C 380 304, 284 380, 256 408 C 228 380, 132 304, 132 210 C 132 124, 188 84, 256 84 Z" 
+        fill="#004328" opacity="0.6"/>
+
+  <!-- Iconic 'G' monogram -->
+  <text x="256" y="280" font-family="Georgia, serif" font-size="190" font-weight="bold" fill="url(#goldGrad)" text-anchor="middle" dominant-baseline="central">G</text>
+  
+  <!-- Star Accent -->
+  <polygon points="256,120 263,138 282,138 267,149 273,167 256,156 239,167 245,149 230,138 249,138" fill="url(#goldGrad)"/>
+</svg>
