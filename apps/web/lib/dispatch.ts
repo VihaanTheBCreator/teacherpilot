@@ -1,16 +1,23 @@
-const dispatch = require('dispatch');
+const email = require('./dispatch/email');
+const whatsapp = require('./dispatch/whatsapp');
+const queue = require('./dispatch/queue');
 
+export const { sendEmail } = email;
+export const { sendWhatsApp } = whatsapp;
 export const {
-  sendEmail,
-  validateStrictSingleRecipient,
-  sendWhatsApp,
-  normalizePhoneNumber,
-  DispatchQueue,
   createDispatchQueue,
   defaultQueue,
   queueCampaign,
   cancelCampaign,
   getCampaign
-} = dispatch;
+} = queue;
 
-export default dispatch;
+export default {
+  sendEmail,
+  sendWhatsApp,
+  createDispatchQueue,
+  defaultQueue,
+  queueCampaign,
+  cancelCampaign,
+  getCampaign
+};

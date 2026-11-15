@@ -1,6 +1,20 @@
-const ai = require('ai');
+const intent = require('./ai/intent');
+const generator = require('./ai/generator');
+const templates = require('./ai/templates');
+const sbiFilter = require('./ai/sbiFilter');
 
+export const { parseIntent, parseIntentOffline } = intent;
+export const { generateMessage, generateMessages, generateMessageOffline } = generator;
 export const {
+  presets,
+  PRESET_SCENARIOS,
+  getSalutation,
+  wrapEmailHtml,
+  formatWhatsAppText
+} = templates;
+export const { applySbiFilter, BLAME_PATTERNS } = sbiFilter;
+
+export default {
   parseIntent,
   parseIntentOffline,
   generateMessage,
@@ -13,6 +27,4 @@ export const {
   getSalutation,
   wrapEmailHtml,
   formatWhatsAppText
-} = ai;
-
-export default ai;
+};
